@@ -1,0 +1,4 @@
+name = "SDIComposite"
+uuid = "a353469c-6ff7-4775-92cd-0d9fc911333c"
+authors = ["Cris Moen <cris.moen@runtosolve.com>"]
+version = "0.1.0"
