@@ -2,3 +2,10 @@ name = "SDIComposite"
 uuid = "a353469c-6ff7-4775-92cd-0d9fc911333c"
 authors = ["Cris Moen <cris.moen@runtosolve.com>"]
 version = "0.1.0"
+
+[deps]
+AISIS100 = "01f7396e-a581-4110-84fa-e8964400bef8"
+OrderedCollections = "bac558e1-5e72-5ebc-8fee-abe8a469f55d"
+
+[compat]
+OrderedCollections = "1.6.3"

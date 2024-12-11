@@ -1,6 +1,6 @@
 module SDIComposite
 
-export UI
+export C2017
 include("C2017.jl")
 using .C2017
 
