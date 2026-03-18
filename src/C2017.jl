@@ -89,7 +89,7 @@ function Eq2_4_7a(Vc, VD, fc, Ac)
 
     ϕv = 0.75
     ϕs = 0.85
-    aVn = minimum([ϕv * Vc + ϕs * VD, (ϕv * 4 * sqrt(fc) * Ac) / 1000])
+    aVn = minimum([ϕv * Vc + ϕs * VD, (ϕv * 4 * sqrt(fc) * Ac)])
 
     return aVn
 
