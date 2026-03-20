@@ -85,16 +85,60 @@ using OrderedCollections, AISIS100
 #####
 
 
+"""
+    Eq2_4_7a(Vc, VD, fc, Ac)
+
+SDI C-2017 Equation 2.4.7(a) — LRFD one-way shear strength.
+
+Returns the design shear strength `ϕVn` (lbf) as the minimum of:
+- `ϕv·Vc + ϕs·VD` (combined concrete + steel deck contribution), and
+- `ϕv·4√fc·Ac` (concrete crushing upper bound).
+
+# Arguments
+- `Vc`: nominal concrete shear strength (lbf)
+- `VD`: nominal steel deck shear strength (lbf)
+- `fc`: concrete compressive strength (psi)
+- `Ac`: concrete shear area (in²)
+
+!!! note "Unit consistency — 1000 factor intentionally omitted"
+    All force terms (`Vc`, `VD`, `aVn`) are in **lbf** and `fc` is in **psi**,
+    so `4√fc·Ac` is already in lbf. The SDI C-2017 code includes a `/1000`
+    factor in the upper-bound term solely to convert it to kips; that factor is
+    intentionally absent here to remain consistent with the lbf unit system
+    used throughout.
+"""
 function Eq2_4_7a(Vc, VD, fc, Ac)
 
     ϕv = 0.75
     ϕs = 0.85
-    aVn = minimum([ϕv * Vc + ϕs * VD, (ϕv * 4 * sqrt(fc) * Ac) / 1000])
+    aVn = minimum([ϕv * Vc + ϕs * VD, (ϕv * 4 * sqrt(fc) * Ac)])
 
     return aVn
 
 end
 
+"""
+    Eq2_4_7c(Vc, VD, fc, Ac)
+
+SDI C-2017 Equation 2.4.7(c) — ASD one-way shear strength.
+
+Returns the allowable shear strength `aVn` (lbf) as the minimum of:
+- `Vc/Ωv + VD/Ωs` (combined concrete + steel deck contribution), and
+- `4√fc·Ac / Ωv` (concrete crushing upper bound).
+
+# Arguments
+- `Vc`: nominal concrete shear strength (lbf)
+- `VD`: nominal steel deck shear strength (lbf)
+- `fc`: concrete compressive strength (psi)
+- `Ac`: concrete shear area (in²)
+
+!!! note "Unit consistency — 1000 factor intentionally omitted"
+    All force terms (`Vc`, `VD`, `aVn`) are in **lbf** and `fc` is in **psi**,
+    so `4√fc·Ac` is already in lbf. The SDI C-2017 code includes a `/1000`
+    factor in the upper-bound term solely to convert it to kips; that factor is
+    intentionally absent here to remain consistent with the lbf unit system
+    used throughout.
+"""
 function Eq2_4_7c(Vc, VD, fc, Ac)
 
     Ωv = 2.00
@@ -102,7 +146,7 @@ function Eq2_4_7c(Vc, VD, fc, Ac)
     aVn = minimum([Vc / Ωv + VD / Ωs, (4 * sqrt(fc) * Ac) / Ωv])
     # aVn = Vc / Ωv + VD / Ωs
 
-    return aVn 
+    return aVn
 
 end
 
