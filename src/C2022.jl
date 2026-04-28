@@ -14,7 +14,6 @@ struct FlexuralProperties
     K3
     K
 
-    L
     d
 
     ρ
@@ -265,15 +264,15 @@ function EqF3_2__9_type_3(K11, K12, ps1, ps2)
 
 end
 
-function EqF3_2__10(K, My, L, design_code)
+function EqF3_2__10(K, My, design_code) #Supplement_1_FINAL_2026_3_1   
     # α = 1 (in feet)
     if design_code == "ASD"
         Ω = 1.75
-        Mn = minimum([K * My, (87.5) * L^2]) / Ω
+        Mn = K * My / Ω
 
     elseif design_code == "LRFD"
         ϕ = 0.85
-        Mn = minimum([K * My, (87.5) * L^2]) * ϕ
+        Mn = K * My * ϕ
     end
 
     return Mn
