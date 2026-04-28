@@ -14,7 +14,6 @@ struct FlexuralProperties
     K3
     K
 
-    L
     d
 
     ρ
