@@ -73,6 +73,29 @@ struct OneWayShearOutputs
 end
 
 
+struct TwoWayShearInputs
+
+    βc
+    bo
+
+    hc
+
+    fc
+
+    design_method
+
+end
+
+struct TwoWayShearOutputs
+
+    inputs
+
+    Vpr
+    aVpr
+
+end
+
+
 """
     EqF_4_1a(Vc, VD, fc, Ac)
 
@@ -139,6 +162,24 @@ function EqF_4_3a(λ, fc, Ac)
 
 end
 
+function EqF_5_1a(βc, bo, hc, fc, design_method)
+
+    Vpr = minimum([0.001 * (2 + 4 / βc) * bo * hc * sqrt(fc), 0.004*bo * hc * sqrt(fc)])
+
+    if design_method == "ASD"
+
+        Ω = 2.00       
+        aVpr = Vpr / Ω
+        
+    elseif design_method == "LRFD"
+        ϕ = 0.75
+        aVpr = Vpr * ϕ
+
+    end
+
+    return Vpr, aVpr
+
+end
 
 function Appendix2_simple_span_Eq_C_A2_1_to_C_A2_3(P, W1, W2, W3, ℓ)
 
